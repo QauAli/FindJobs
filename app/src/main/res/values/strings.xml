@@ -1,0 +1,217 @@
+<resources>
+    <string name="app_name">FindJobs</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_applicant_cycle">ApplicantCycle</string>
+
+    <string-array name="educationF">
+        <item>Middle</item>
+        <item>Matric</item>
+        <item>HSSC</item>
+        <item>BSC/BA</item>
+        <item>MSC/MA</item>
+        <item>Mphil</item>
+        <item>BS</item>
+        <item>MS</item>
+    </string-array>
+
+    <string-array name="job_status">
+        <item>Searching</item>
+        <item>Working</item>
+    </string-array>
+
+    <string-array name="education">
+        <item>middle</item>
+        <item>SSC</item>
+        <item>HSSC</item>
+        <item>BSC</item>
+        <item>MSC</item>
+        <item>MPHIL</item>
+        <item>BS</item>
+        <item>MS</item>
+    </string-array>
+    <string-array name="province">
+        <item>Kpk</item>
+        <item>Punjab</item>
+        <item>Sindh</item>
+        <item>Balochistan</item>
+        <item>Islamabad(Captial Area)</item>
+        <item>GilgitBaltistan</item>
+        <item>Kashmir</item>
+    </string-array>
+    <string-array name="Kpk">
+        <item>Peshawar</item>
+        <item>Mardan</item>
+        <item>Chardadda</item>
+        <item>Bannu</item>
+        <item>Dera Ismail Khan</item>
+        <item>Dir Upper</item>
+        <item>Dir Lower</item>
+        <item>Abbottabad</item>
+        <item>Battagram</item>
+        <item>Buner</item>
+        <item>chitral</item>
+        <item>Hangu</item>
+        <item>Haripur</item>
+        <item>Karak</item>
+        <item>Kohat</item>
+        <item>Lakki Marwat</item>
+        <item>Malakand</item>
+        <item>Mansehra</item>
+        <item>Nowshera</item>
+        <item>Shangla</item>
+        <item>Swabi</item>
+        <item>Swat</item>
+        <item>Tor Ghar</item>
+        <item>Kohistan Lower</item>
+        <item>Bajaur</item>
+        <item>Khyber</item>
+        <item>Kurram</item>
+        <item>Mohmand</item>
+        <item>North Waziristan</item>
+        <item>Orakzai</item>
+        <item>South Waziristan</item>
+        <item>Kolai Pallas</item>
+    </string-array>
+    <string-array name="Punjab">
+        <item>Attock</item>
+        <item>Bahawalpur</item>
+        <item>Bshawalnagar</item>
+        <item>Bhakkar</item>
+        <item>Chakwal</item>
+        <item>Chiniot</item>
+        <item>Faisalabad</item>
+        <item>Dera Ghazi Khan</item>
+        <item>Gujranwala</item>
+        <item>Gujrat</item>
+        <item>Hafizabad</item>
+        <item>Jhang</item>
+        <item>Jhelum</item>
+        <item>Kasur</item>
+        <item>Khanewal</item>
+        <item>Khusab</item>
+        <item>Lahore</item>
+        <item>Layyah</item>
+        <item>Lodhran</item>
+        <item>Mandi Bahauddin</item>
+        <item>Mianwali</item>
+        <item>Multan</item>
+        <item>Muzaffargarh</item>
+        <item>Narowal</item>
+        <item>Nankana Sahib</item>
+        <item>Okara</item>
+        <item>Pakpattan</item>
+        <item>Rahim Yar Khan</item>
+        <item>Rajanpur</item>
+        <item>Rawalpindi</item>
+        <item>Sahiwal</item>
+        <item>Sargodha</item>
+        <item>Sheikhupura</item>
+        <item>Sialkot</item>
+        <item>Toba Tek Singh</item>
+        <item>Vehari</item>
+    </string-array>
+    <string-array name="Sindh">
+        <item>Badin</item>
+        <item>Dadu</item>
+        <item>Ghotki</item>
+        <item>Hyderabad</item>
+        <item>Jacobabad</item>
+        <item>Jamshoro</item>
+        <item>Karachi Central</item>
+        <item>Karachi East</item>
+        <item>Karachi South</item>
+        <item>Karachi West</item>
+        <item>Kashmore</item>
+        <item>Khaipur</item>
+        <item>Korangi</item>
+        <item>Larkana</item>
+        <item>Malir</item>
+        <item>Mirpur Khas</item>
+        <item>Nausharo Feroze</item>
+        <item>Qambar Shahdadkot</item>
+        <item>Sanghar</item>
+        <item>Shaheed Benazir Abad</item>
+        <item>Shaikarpur</item>
+        <item>Sujawal</item>
+        <item>Sukkur</item>
+        <item>Tando Allahyar</item>
+        <item>Tando Muhammad Khan</item>
+        <item>Tharparkar</item>
+        <item>Thatta</item>
+        <item>Umerkot</item>
+    </string-array>
+    <string-array name="Balochistan">
+        <item>Awaran</item>
+        <item>Bharkhan</item>
+        <item>Chagai</item>
+        <item>Dera Bugti</item>
+        <item>Gawadar</item>
+        <item>Harnai</item>
+        <item>Jafarabad</item>
+        <item>Jhal Magsi</item>
+        <item>Kachhi</item>
+        <item>Kalat</item>
+        <item>Kech</item>
+        <item>Kharan</item>
+        <item>Khuzdar</item>
+        <item>Killa Abdullah</item>
+        <item>Killa Saifullah</item>
+        <item>Kohlu</item>
+        <item>Lasbela</item>
+        <item>Lehri</item>
+        <item>Loralai</item>
+        <item>Mastung</item>
+        <item>Musakhel</item>
+        <item>Nasirabad</item>
+        <item>Nushaki</item>
+        <item>Panjgur</item>
+        <item>Pishin</item>
+        <item>Quetta</item>
+        <item>Sherani</item>
+        <item>Sibi</item>
+        <item>Sohbatpur</item>
+        <item>Washuk</item>
+        <item>Zhob</item>
+        <item>Ziarat</item>
+    </string-array>
+    <string-array name="Islamabad">
+        <item>Islamabad</item>
+    </string-array>
+    <string-array name="Gilgit">
+        <item>Gilgit</item>
+        <item>Baltistan</item>
+    </string-array>
+    <string-array name="Kashmir">
+        <item>Muzaffarabad</item>
+        <item>Jehlum Valley</item>
+        <item>Neelum</item>
+        <item>Mirpur</item>
+        <item>Bhimar</item>
+        <item>Kotli</item>
+        <item>Poonch</item>
+        <item>Bagh</item>
+        <item>Haveli</item>
+        <item>Sudhnati</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>male</item>
+        <item>female</item>
+    </string-array>
+
+    <string-array name="type">
+        <item>Applicant</item>
+        <item>Advertiser</item>
+        <item>Admin</item>
+    </string-array>
+
+
+</resources>

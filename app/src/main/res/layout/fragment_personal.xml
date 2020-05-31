@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="Fragments.PersonalF">
+
+    <!--Title-->
+    <TextView
+        style="@style/Form_title"
+        android:text="Personal Information" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10sp">
+
+            <!--Firstname-->
+            <TextView
+                android:id="@+id/first_name_label"
+                style="@style/field_label"
+                android:text="First Name" />
+
+            <EditText
+                android:id="@+id/first_name"
+                style="@style/name_edittext" />
+            <!--Lastname-->
+            <TextView
+                android:id="@+id/last_name_label"
+                style="@style/field_label"
+                android:text="Last Name" />
+
+            <EditText
+                android:id="@+id/last_name"
+                style="@style/name_edittext" />
+            <!--Cnic-->
+            <TextView
+                android:id="@+id/cnic_label"
+                style="@style/field_label"
+                android:text="Cnic" />
+
+            <EditText
+                android:id="@+id/cnic"
+                style="@style/number_edittext" />
+            <!--Dob-->
+            <TextView
+                android:id="@+id/dob"
+                style="@style/field_label"
+                android:inputType="none"
+                android:text="Birth Date" />
+
+            <EditText
+                android:id="@+id/birth_date"
+                style="@style/date_picker" />
+            <!--Fathername-->
+            <TextView
+                android:id="@+id/father_name_label"
+                style="@style/field_label"
+                android:text="Father Name" />
+            <EditText
+                android:id="@+id/father_name"
+                style="@style/name_edittext" />
+            <!--Email-->
+            <TextView
+                android:id="@+id/email_label"
+                style="@style/field_label"
+                android:text="Email" />
+            <EditText
+                android:id="@+id/email"
+                style="@style/email_style" />
+            <!--otp-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/otp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="otp"
+                    android:inputType="textPersonName"
+                    />
+                <Button
+                    android:id="@+id/sendOtp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="send Otp" />
+
+            </LinearLayout>
+
+            <!--Password-->
+            <TextView
+                android:id="@+id/password_label"
+                style="@style/field_label"
+                android:text="Password" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"/>
+            <!--PasswordRetype-->
+            <TextView
+                android:id="@+id/passwordRetype_label"
+                style="@style/field_label"
+                android:text="Password Retype" />
+            <EditText
+                android:id="@+id/password_retype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+            <!--Domicile Title-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Domicile"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+            <!--Province-->
+            <TextView
+                style="@style/field_label"
+                android:text="Province"
+                />
+            <Spinner
+                android:id="@+id/province_spinner_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/province"
+                />
+            <TextView
+                style="@style/field_label"
+                android:text="District"
+                />
+            <Spinner
+                android:id="@+id/district_spinner_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/Kpk"
+                />
+            <Button
+                android:id="@+id/sendBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Next" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

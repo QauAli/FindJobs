@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Fragments.ContactF"
+    android:orientation="vertical"
+    android:padding="10sp">
+
+    <!--Title-->
+    <TextView
+        style="@style/Form_title"
+        android:text="Contact Information" />
+    <!--Postal Address-->
+    <TextView
+        android:id="@+id/postal_address_label"
+        style="@style/field_label"
+        android:text="Postal Address"
+        android:paddingTop="10sp"/>
+    <EditText
+        android:id="@+id/postal_address"
+        style="@style/address_style" />
+
+    <!--Permanent Address-->
+    <TextView
+        android:id="@+id/permanent_address_label"
+        style="@style/field_label"
+        android:text="Permanent Address" />
+    <EditText
+        android:id="@+id/permanent_address"
+        style="@style/address_style" />
+
+    <!--Mobile-->
+    <TextView
+        style="@style/field_label"
+        android:text="Mobile" />
+    <EditText
+        android:id="@+id/mobile"
+        style="@style/phone_edittext" />
+
+    <!--phone-->
+    <TextView
+        style="@style/field_label"
+        android:text="Phone" />
+    <EditText
+        android:id="@+id/phone"
+        style="@style/phone_edittext" />
+
+    <!--NextButton-->
+    <Button
+        android:id="@+id/sendBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next" />
+
+</LinearLayout>

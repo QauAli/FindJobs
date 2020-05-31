@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="Fragments.EducationF">
+    <!--Title-->
+    <TextView
+        style="@style/Form_title"
+        android:text="Educational Information" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_id"
+                android:layout_width="200sp"
+                android:layout_height="200sp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_launcher" />
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:id="@+id/skills_layout"
+                android:stretchColumns="*">
+                <!--Job status-->
+                <TableRow>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/field_label"
+                            android:text="Job status"
+                            android:layout_weight="1"
+                            />
+                        <Spinner
+                            android:id="@+id/job_status"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/job_status"
+                            />
+
+                    </LinearLayout>
+                </TableRow>
+                <!--EducationF-->
+                <TableRow>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/field_label"
+                            android:text="Education"
+                            android:layout_weight="1"/>
+
+                        <Spinner
+                            android:id="@+id/education_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/educationF"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+                </TableRow>
+                <!--Matric info-->
+                <TableRow
+                    android:id="@+id/ssc"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/matric_year"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:hint="Matric Year"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/matric_grades"
+                        android:hint="Matric Grade"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--HSSC info-->
+                <TableRow
+                    android:id="@+id/hssc"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/hssc_year"
+                        android:hint="HSSC Year"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPersonName"
+                        android:layout_weight="1"/>
+
+                    <EditText
+                        android:id="@+id/hssc_grade"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="HSSC Grades"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--BSC/BA info-->
+                <TableRow
+                    android:id="@+id/bsc"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/bsc_year"
+                        android:hint="BSC/BA Year"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/bsc_grade"
+                        android:hint="BSC/BA Grades"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--MSC/MA info-->
+                <TableRow
+                    android:id="@+id/msc"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/msc_year"
+                        android:hint="MSC/MA Year"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/msc_grade"
+                        android:hint="MSC/MA Grades"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--MPHIL info-->
+                <TableRow
+                    android:id="@+id/mphil"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/mphil_year"
+                        android:hint="MPHIL Year"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/mphil_grade"
+                        android:hint="MPHIL Grades"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--BS info-->
+                <TableRow
+                    android:id="@+id/bs"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/bs_year"
+                        android:hint="BS Year"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/bs_grade"
+                        android:hint="BS Grades"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--MS info-->
+                <TableRow
+                    android:id="@+id/ms"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/ms_year"
+                        android:hint="MS Year"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/ms_grade"
+                        android:hint="MS Grades"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--checks for diploma and experience-->
+                <TableRow>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/experience_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Experiance"
+                        android:layout_weight="1"/>
+                    <CheckBox
+                        android:id="@+id/diploma_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Diploma" />
+                    </LinearLayout>
+                </TableRow>
+                <!--Experience info-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/experience_row"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <EditText
+                            android:id="@+id/experience_info"
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"
+                            android:hint="Experiance Discription"
+                            android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+                <!--Deploma info-->
+                <TableRow
+                    android:id="@+id/diploma_row"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/diploma_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:hint="Diploma Year"
+                        android:inputType="textPersonName" />
+                    <EditText
+                        android:id="@+id/diploma_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:hint="Diploma title"
+                        android:inputType="textPersonName" />
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+            <!--SubmitButton-->
+            <Button
+                android:id="@+id/education_next_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Next" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
