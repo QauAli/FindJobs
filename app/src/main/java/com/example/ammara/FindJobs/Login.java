@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import RestfullServices.Client;
-import RestfullServices.FindJobService;
-import ModelClasses.Advertiser;
-import ModelClasses.Applicant;
+import Api.DataService;
+import Api.RetrofitClientInstance;
+import Models.Advertiser;
+import Models.Applicant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +23,6 @@ public class Login extends AppCompatActivity {
     private Button reg_applicant, reg_advertiser, forget_pass, btn_login;
     private Spinner type;
     private EditText email,password;
-    private FindJobService service = Client.getClient().create(FindJobService.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userType = type.getSelectedItem().toString();
+                DataService service = RetrofitClientInstance.getRetrofitInstance().create(DataService.class);
                 if(userType.equalsIgnoreCase("Applicant")){
                     Call<Applicant> call = service.authenticateApplicant(new Applicant(email.getText().toString(),
                             password.getText().toString()));
@@ -55,14 +55,10 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Applicant> call, Response<Applicant> response) {
                             if(response.isSuccessful() && response.body()!=null){
-                                SharedPreferences.Editor editor = getSharedPreferences(Constants.file, MODE_PRIVATE).edit();
+                                SharedPreferences.Editor editor = getSharedPreferences("credentials", MODE_PRIVATE).edit();
                                 editor.putString("name", response.body().getFirst_name()+response.body().getLast_name());
                                 editor.putString("email", response.body().getEmail());
                                 editor.putString("imageName", response.body().getImage_path());
-                                editor.putString("mobile", response.body().getMobile());
-                                editor.putString("postal address", response.body().getPostal_address());
-                                editor.putString("ApplicantPassword", response.body().getPassword());
-
                                 editor.putString("type", "Applicant");
                                 editor.putInt("ApplicantId", response.body().getId());
                                 editor.putInt("currentUserId", response.body().getId());
@@ -89,16 +85,12 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Advertiser> call, Response<Advertiser> response) {
                             if(response.isSuccessful() && response.body()!=null){
-                                SharedPreferences.Editor editor = getSharedPreferences(Constants.file, MODE_PRIVATE).edit();
+                                SharedPreferences.Editor editor = getSharedPreferences("credentials", MODE_PRIVATE).edit();
                                 editor.putString("name", response.body().getName());
                                 editor.putString("email", response.body().getEmail());
                                 editor.putString("imageName", response.body().getImagename());
-                                editor.putString("mobile", response.body().getMobile());
-                                editor.putString("address", response.body().getAddress());
-                                editor.putString("company", response.body().getCompany());
                                 editor.putString("type", "Advertiser");
                                 editor.putInt("AdvertiserId", response.body().getId());
-                                editor.putString("AdvertiserPassword", response.body().getPassword());
                                 editor.putInt("currentUserId", response.body().getId());
                                 editor.apply();
                                 Intent myIntent = new Intent(Login.this, AdvertiserCycle.class);
@@ -116,22 +108,7 @@ public class Login extends AppCompatActivity {
                     });
 
 
-                }else if(userType.equalsIgnoreCase("Admin")){
-                    if(email.getText().toString().equalsIgnoreCase("admin@gmail.com") && password.getText().toString().equalsIgnoreCase("12345")){
-                        SharedPreferences.Editor editor = getSharedPreferences(Constants.file, MODE_PRIVATE).edit();
-                        editor.putString("type", "Admin");
-                        editor.apply();
-                        Intent myIntent = new Intent(Login.this, AdminCycle.class);
-                        Login.this.startActivity(myIntent);
-                    }
                 }
-            }
-        });
-        forget_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(Login.this, ForgetPassword.class);
-                Login.this.startActivity(myIntent);
             }
         });
     }
@@ -139,7 +116,8 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SharedPreferences prefs = getSharedPreferences(Constants.file, MODE_PRIVATE);
+        //check credentials
+        SharedPreferences prefs = getSharedPreferences("credentials", MODE_PRIVATE);
         String Usertype = prefs.getString("type", "Logout");
 
         if(Usertype.equalsIgnoreCase("Advertiser")){
@@ -147,9 +125,6 @@ public class Login extends AppCompatActivity {
             Login.this.startActivity(myIntent);
         }else if(Usertype.equalsIgnoreCase("Applicant")){
             Intent myIntent = new Intent(Login.this, ApplicantCycle.class);
-            Login.this.startActivity(myIntent);
-        }else if(Usertype.equalsIgnoreCase("Admin")){
-            Intent myIntent = new Intent(Login.this, AdminCycle.class);
             Login.this.startActivity(myIntent);
         }else {
         }
@@ -161,7 +136,7 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.lEditPassword);
         reg_advertiser = findViewById(R.id.btn_advertiser_reg);
         reg_applicant = findViewById(R.id.btn_applicant_reg);
-        forget_pass = findViewById(R.id.btnForgotPassword);
+        //forget_pass = findViewById(R.id.btnForgotPassword);
         btn_login = findViewById(R.id.btnLogin);
     }
 }

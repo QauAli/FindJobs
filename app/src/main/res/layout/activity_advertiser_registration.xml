@@ -27,7 +27,7 @@
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_gravity="left"
-                    android:src="@drawable/avatar"
+                    android:src="@mipmap/avatar"
                     />
                 <!--Name-->
                 <EditText
@@ -91,29 +91,6 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                  />
-            <!--otp-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/otp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="otp"
-                    android:inputType="textPersonName"
-                    />
-                <Button
-                    android:id="@+id/sendOtp"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="send Otp" />
-
-            </LinearLayout>
             <!--Password-->
             <EditText
                 android:id="@+id/password"

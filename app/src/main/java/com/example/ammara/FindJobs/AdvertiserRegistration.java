@@ -16,17 +16,15 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.congfandi.simpledatepicker.Picker;
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.myhexaville.smartimagepicker.ImagePicker;
 
 import java.io.File;
-import java.util.Random;
 
-import RestfullServices.FindJobService;
-import RestfullServices.Client;
-import ModelClasses.Advertiser;
-import ModelClasses.UserImage;
-import ModelClasses.Validation;
+import Api.DataService;
+import Api.RetrofitClientInstance;
+import Models.Advertiser;
+import Models.UserImage;
+import Models.Validation;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -37,11 +35,8 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
     private ImagePicker imagePicker;
     private ImageView imageView;
     private Spinner province, district, gender;
-    private Button btn,sendOtp;
-    private EditText otp, name, cnic, birth_date, mobile, address, company, email, password, retype_password;
-    private FindJobService service = Client.getClient().create(FindJobService.class);
-    private Advertiser advertiser;
-    private String otpString="1111222223333";
+    private Button btn;
+    private EditText name, cnic, birth_date, mobile, address, company, email, password, retype_password;
 
     private void getReferences() {
         imageView = findViewById(R.id.profile_image);
@@ -58,8 +53,6 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
         company = findViewById(R.id.company);
         password = findViewById(R.id.password);
         retype_password = findViewById(R.id.password_retype);
-        sendOtp = findViewById(R.id.sendOtp);
-        otp = findViewById(R.id.otp);
     }
 
 
@@ -69,7 +62,6 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
         setContentView(R.layout.activity_advertiser_registration);
 
         getReferences();
-        //Toast.makeText(AdvertiserRegistration.this, otp.getText().toString(), Toast.LENGTH_SHORT).show();
 
         final ArrayAdapter<CharSequence> Kpk = ArrayAdapter.createFromResource(AdvertiserRegistration.this,
                 R.array.Kpk, android.R.layout.simple_spinner_item);
@@ -85,35 +77,6 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
                 R.array.Gilgit, android.R.layout.simple_spinner_item);
         final ArrayAdapter<CharSequence> Kashmir = ArrayAdapter.createFromResource(AdvertiserRegistration.this,
                 R.array.Kashmir, android.R.layout.simple_spinner_item);
-
-        sendOtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                otpString = random();
-                BackgroundMail.newBuilder(AdvertiserRegistration.this)
-                        .withUsername("Ammarak631@gmail.com")
-                        .withPassword("ammara1234")
-                        .withMailto(email.getText().toString())
-                        .withType(BackgroundMail.TYPE_PLAIN)
-                        .withSubject("Otp")
-                        .withBody(otpString)
-                        .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                            @Override
-                            public void onSuccess() {
-                                //Toast.makeText(getContext(),,Toast.LENGTH_SHORT).show();
-                                //do some magic
-                            }
-                        })
-                        .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                            @Override
-                            public void onFail() {
-                                //do some magic
-                            }
-                        })
-                        .send();
-            }
-        });
 
         birth_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +118,7 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
 
                 //Toast.makeText(getContext(),province.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -167,8 +131,8 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
                     File profile_image = imagePicker.getImageFile();
                     if (Validation.isEmpty(name)) {
                         name.setError("Required");
-                    } else if (!Validation.iscnic(cnic)) {
-                        cnic.setError("Invalid!");
+                    } else if (Validation.isEmpty(cnic)) {
+                        cnic.setError("Required");
                     } else if (Validation.isEmpty(birth_date)) {
                         birth_date.setError("Required");
                     } else if (Validation.isEmpty(email) || Validation.isEmail(email)) {
@@ -177,18 +141,17 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
                         password.setError("Required");
                     } else if (Validation.isEmpty(retype_password)) {
                         retype_password.setError("Required");
-                    } else if (!Validation.isPhone(mobile)) {
-                        mobile.setError("Invalid!");
+                    } else if (Validation.isEmpty(mobile)) {
+                        mobile.setError("Required");
                     } else if (Validation.isEmpty(address)) {
                         address.setError("Required");
                     } else if (Validation.isEmpty(company)) {
                         company.setError("Required");
                     }else if (!password.getText().toString().equalsIgnoreCase(retype_password.getText().toString())) {
                         retype_password.setError("password not match");
-                    }else if (!otpString.equalsIgnoreCase(otp.getText().toString())) {
-                        otp.setError("Invalid Otp!");
-                    }  else if (password.getText().toString().equalsIgnoreCase(retype_password.getText().toString())) {
-                        advertiser = new Advertiser(
+                    } else if (password.getText().toString().equalsIgnoreCase(retype_password.getText().toString())) {
+                        DataService service = RetrofitClientInstance.getRetrofitInstance().create(DataService.class);
+                        Call<Advertiser> call = service.createAdvertiser(new Advertiser(
                                 0,
                                 name.getText().toString(),
                                 cnic.getText().toString(),
@@ -201,8 +164,7 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
                                 gender.getSelectedItem().toString(),
                                 company.getText().toString(),
                                 mobile.getText().toString()
-                        );
-                        Call<Advertiser> call = service.createAdvertiser(advertiser);
+                        ));
                         call.enqueue(new Callback<Advertiser>() {
                             @Override
                             public void onResponse(Call<Advertiser> call, Response<Advertiser> response) {
@@ -232,14 +194,14 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
                                     //Toast.makeText(AdvertiserRegistration.this,response.body().getId()+"",Toast.LENGTH_SHORT).show();
                                 }
                             }
+
                             @Override
                             public void onFailure(Call<Advertiser> call, Throwable t) {
                                 Toast.makeText(AdvertiserRegistration.this, "Error", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
-                }else{
-                    Toast.makeText(AdvertiserRegistration.this, "Plz select Image!", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -286,16 +248,5 @@ public class AdvertiserRegistration extends AppCompatActivity implements DatePic
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         imagePicker.handlePermission(requestCode, grantResults);
-    }
-    public static String random() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(8);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
     }
 }

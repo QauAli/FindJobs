@@ -16,16 +16,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import RestfullServices.FindJobService;
-import Adapters.ProfileAdapter;
-
-import com.example.ammara.FindJobs.Constants;
+import RVAdapters.ProfileRvAdapter;
 import com.example.ammara.FindJobs.R;
 
 import java.util.List;
 
-import RestfullServices.Client;
-import ModelClasses.Applicant;
+import Api.DataService;
+import Api.RetrofitClientInstance;
+import Models.Applicant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,10 +33,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class Profiles extends Fragment {
 
     private Spinner province, district;
-    private  FindJobService service = Client.getClient().create(FindJobService.class);
 
     private RecyclerView rv;
-    private ProfileAdapter adapter;
+    private ProfileRvAdapter adapter;
 
     public Profiles() {
         // Required empty public constructor
@@ -113,6 +110,7 @@ public class Profiles extends Fragment {
         district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                DataService service = RetrofitClientInstance.getRetrofitInstance().create(DataService.class);
                 Call<List<Applicant>> call = service.getAllProfiles(province.getSelectedItem().toString(),
                         district.getSelectedItem().toString());
                 call.enqueue(new Callback<List<Applicant>>() {
@@ -120,9 +118,9 @@ public class Profiles extends Fragment {
                     public void onResponse(Call<List<Applicant>> call, Response<List<Applicant>> response) {
                         if (response.isSuccessful()) {
                             List<Applicant> profiles = response.body();
-                            SharedPreferences prefs = getActivity().getSharedPreferences(Constants.file, MODE_PRIVATE);
+                            SharedPreferences prefs = getActivity().getSharedPreferences("credentials", MODE_PRIVATE);
                             int advertiserId = prefs.getInt("AdvertiserId", 0);
-                            adapter = new ProfileAdapter(profiles, getContext(), advertiserId);
+                            adapter = new ProfileRvAdapter(profiles, getContext(), advertiserId);
                             rv.setAdapter(adapter);
                             rv.setLayoutManager(new LinearLayoutManager(getContext()));
                         } else {

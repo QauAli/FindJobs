@@ -129,20 +129,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Apply" />
-
-        <Button
-            android:id="@+id/wishlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add to wishlist" />
-
-        <Button
-            android:id="@+id/msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Message" />
     </LinearLayout>
 
 </LinearLayout>

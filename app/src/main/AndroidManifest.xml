@@ -3,7 +3,6 @@
     package="com.example.ammara.FindJobs">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,13 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ForgetPassword"></activity>
-        <activity android:name=".AdminCycle" />
-        <activity android:name=".UpdateAdvertiser" />
-        <activity android:name=".UpdateApplicant" />
-        <activity android:name=".ProfileView" />
-        <activity android:name=".Messages" />
-        <activity android:name=".Login">
+        <activity android:name="com.example.ammara.FindJobs.MessagesActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.ammara.FindJobs.Login"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,20 +22,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ApplicantCycle"
+            android:name="com.example.ammara.FindJobs.ApplicantCycle"
             android:label="@string/title_activity_applicant_cycle"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ApplicantRegistration"
+            android:name="com.example.ammara.FindJobs.ApplicantRegistration"
             android:label="ApplicantRegistration"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".AdvertiserRegistration"
+            android:name="com.example.ammara.FindJobs.AdvertiserRegistration"
             android:label="AdvertiserRegistration"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".AdvertiserCycle"
+            android:name="com.example.ammara.FindJobs.AdvertiserCycle"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

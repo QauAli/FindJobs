@@ -20,8 +20,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import RestfullServices.ImageLibrary;
-import Fragments.Coversations;
+import Api.ImageLoader;
+import Fragments.CoversationsFragment;
 import Fragments.Jobs;
 import Fragments.Wishlist;
 
@@ -31,9 +31,6 @@ public class ApplicantCycle extends AppCompatActivity
     private ImageView profileImageView;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    private Jobs jobs = new Jobs();
-    private Wishlist wishlist =new Wishlist();
-    private Coversations coversations = new Coversations();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +60,7 @@ public class ApplicantCycle extends AppCompatActivity
         mViewPager.setOnTouchListener((v, event) -> true);
 
 
-        SharedPreferences prefs = getSharedPreferences(Constants.file, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("credentials", MODE_PRIVATE);
         String name = prefs.getString("name", "No");
         String email = prefs.getString("email", "No");
         String imageName = prefs.getString("imageName", "No");
@@ -72,7 +69,7 @@ public class ApplicantCycle extends AppCompatActivity
         shown_email  = (TextView) headerView.findViewById(R.id.shown_email);
         shown_name  = (TextView) headerView.findViewById(R.id.shown_name);
         profileImageView = headerView.findViewById(R.id.imageView);
-        ImageLibrary.LoadImage(profileImageView,imageName,ApplicantCycle.this);
+        ImageLoader.LoadImage(profileImageView,imageName,ApplicantCycle.this);
 
         shown_name.setText(name);
         shown_email.setText(email);
@@ -95,14 +92,10 @@ public class ApplicantCycle extends AppCompatActivity
         // Handle navigation_advertiser_cycle view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_update_account) {
-            Intent myIntent = new Intent(ApplicantCycle.this, UpdateApplicant.class);
-            myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            ApplicantCycle.this.startActivity(myIntent);
-
+        if (id == R.id.nav_account) {
             // Handle the camera action
         } else if (id == R.id.nav_logout) {
-            SharedPreferences.Editor editor = ApplicantCycle.this.getSharedPreferences(Constants.file, MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = ApplicantCycle.this.getSharedPreferences("credentials", MODE_PRIVATE).edit();
             editor.clear();
             editor.apply();
             Intent myIntent = new Intent(ApplicantCycle.this, Login.class);
@@ -125,11 +118,11 @@ public class ApplicantCycle extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return jobs;
+                    return new Jobs();
                 case 1:
-                    return wishlist;
+                    return new Wishlist();
                 case 2:
-                    return coversations;
+                    return new CoversationsFragment();
                 default:
                     return null;
             }
@@ -160,4 +153,5 @@ public class ApplicantCycle extends AppCompatActivity
             return false;
         }
     };
+
 }

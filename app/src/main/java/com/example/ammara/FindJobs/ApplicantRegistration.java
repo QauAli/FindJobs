@@ -14,28 +14,26 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import RestfullServices.Client;
-import RestfullServices.FindJobService;
-import Fragments.ContactF;
-import Fragments.EducationF;
-import Fragments.PersonalF;
+import Api.DataService;
+import Api.RetrofitClientInstance;
+import Fragments.ContactFragment;
+import Fragments.EducationFragment;
+import Fragments.PersonalFragment;
 
-import ModelClasses.Applicant;
-import ModelClasses.UserImage;
-import ModelClasses.ApplicantWithImage;
-import ModelClasses.Education;
+import Models.Applicant;
+import Models.UserImage;
+import Models.ApplicantWithImage;
+import Models.Education;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ApplicantRegistration extends AppCompatActivity implements PersonalF.SendMessage, ContactF.SendContact, EducationF.SendEducation {
+public class ApplicantRegistration extends AppCompatActivity implements PersonalFragment.SendMessage, ContactFragment.SendContact, EducationFragment.SendEducation {
 
-    PersonalF personalF = PersonalF.newInstance();
+    PersonalFragment personalFragment = PersonalFragment.newInstance();
     ApplicantWithImage applicantWithImage;
-    private FindJobService service = Client.getClient().create(FindJobService.class);
-    private Applicant applicant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,7 @@ public class ApplicantRegistration extends AppCompatActivity implements Personal
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.fragment_container, personalF);
+        fragmentTransaction.add(R.id.fragment_container, personalFragment);
         //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
@@ -54,9 +52,9 @@ public class ApplicantRegistration extends AppCompatActivity implements Personal
     @Override
     public void sendPersonalInfo(ApplicantWithImage applicantWithImage) {
 
-        ContactF contactF = ContactF.newInstance();
+        ContactFragment contactFragment = ContactFragment.newInstance();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, contactF);
+        fragmentTransaction.replace(R.id.fragment_container, contactFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         this.applicantWithImage = applicantWithImage;
@@ -68,9 +66,9 @@ public class ApplicantRegistration extends AppCompatActivity implements Personal
         this.applicantWithImage.setPermanent_address(applicantWithImage.getPermanent_address());
         this.applicantWithImage.setMobile(applicantWithImage.getMobile());
         this.applicantWithImage.setPhone(applicantWithImage.getPhone());
-        EducationF educationF = EducationF.newInstance();
+        EducationFragment educationFragment = EducationFragment.newInstance();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, educationF);
+        fragmentTransaction.replace(R.id.fragment_container, educationFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -81,7 +79,7 @@ public class ApplicantRegistration extends AppCompatActivity implements Personal
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         if (fragments != null) {
             for (Fragment f : fragments) {
-                if (f instanceof EducationF) {
+                if (f instanceof EducationFragment) {
                     f.onActivityResult(requestCode, resultCode, data);
                 }
             }
@@ -97,7 +95,7 @@ public class ApplicantRegistration extends AppCompatActivity implements Personal
         this.applicantWithImage.setSkills(applicantWithImage.getSkills());
         this.applicantWithImage.setExperianceDetails((applicantWithImage.getExperianceDetails()));
 
-        applicant = new Applicant(this.applicantWithImage.getFirst_name(),
+        Applicant applicant = new Applicant(this.applicantWithImage.getFirst_name(),
                 this.applicantWithImage.getLast_name(),
                 this.applicantWithImage.getCnic(),
                 this.applicantWithImage.getBirth_date(),
@@ -125,6 +123,8 @@ public class ApplicantRegistration extends AppCompatActivity implements Personal
             emptySkills.add(new String(""));
             applicant.setSkills(emptySkills);
         }
+
+        DataService service = RetrofitClientInstance.getRetrofitInstance().create(DataService.class);
         Call<Applicant> call = service.createApplicant(applicant);
         call.enqueue(new Callback<Applicant>() {
             @Override
@@ -134,6 +134,7 @@ public class ApplicantRegistration extends AppCompatActivity implements Personal
                     //Toast.makeText(ApplicantRegistration.this, response.body().getId() + "", Toast.LENGTH_SHORT).show();
                     RequestBody imagee = RequestBody.create(MediaType.parse("image/*"), profileImg);
                     RequestBody idd = RequestBody.create(MediaType.parse("text/plain"), ""+id);
+                    DataService service2 = RetrofitClientInstance.getRetrofitInstance().create(DataService.class);
                     Call<UserImage> call2 = service.createApplicantImage(imagee,idd);
                     call2.enqueue(new Callback<UserImage>() {
                         @Override

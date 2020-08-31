@@ -15,14 +15,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import Adapters.AdvertisementAdapter;
+import RVAdapters.AdvertisementRvAdapter;
 import com.example.ammara.FindJobs.R;
 
 import java.util.List;
 
-import RestfullServices.FindJobService;
-import RestfullServices.Client;
-import ModelClasses.Advertisement;
+import Api.DataService;
+import Api.RetrofitClientInstance;
+import Models.Advertisement;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,8 +32,7 @@ public class Jobs extends Fragment {
     private Spinner province, district;
 
     private RecyclerView rv;
-    private AdvertisementAdapter adapter;
-    private FindJobService service = Client.getClient().create(FindJobService.class);
+    private AdvertisementRvAdapter adapter;
 
 
     public Jobs() {
@@ -111,6 +110,7 @@ public class Jobs extends Fragment {
         district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                DataService service = RetrofitClientInstance.getRetrofitInstance().create(DataService.class);
                 Call<List<Advertisement>> call = service.getAllAds(province.getSelectedItem().toString(),
                         district.getSelectedItem().toString());
                 call.enqueue(new Callback<List<Advertisement>>() {
@@ -121,7 +121,7 @@ public class Jobs extends Fragment {
 //                            for (int i = 0; i < advertisements.size(); i++) {
 //                                Toast.makeText(getContext(), advertisements.get(0).getTitle(), Toast.LENGTH_SHORT).show();
 //                            }
-                            adapter = new AdvertisementAdapter(advertisements, getContext(),1);
+                            adapter = new AdvertisementRvAdapter(advertisements, getContext());
                             rv.setAdapter(adapter);
                             rv.setLayoutManager(new LinearLayoutManager(getContext()));
                         } else {
